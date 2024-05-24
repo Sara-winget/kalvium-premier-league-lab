@@ -1,4 +1,4 @@
-//import { players } from './data.js';
+import { players } from './data.js';
 //Progression 1 - create a Manager array and return it
 let managerName = "Alex Ferguson";
 let managerAge = 78;
@@ -25,14 +25,14 @@ try {
 var formation = [4, 4, 3];
 
 //write your function here
-function createFormation(formationArray) {
+function createFormation(formArray) {
   if (formationArray.length === 0) {
     return null;
   }
   return {
-    "defender": formationArray[0],
-    "midfield": formationArray[1],
-    "forward": formationArray[2]
+    "defender": formArray[0],
+    "midfield": formArray[1],
+    "forward": formrArray[2]
   };
 }
 // Dont edit the following code
@@ -44,7 +44,7 @@ try {
 }
 
 //Progression 3 - Filter players that debuted in ___ year
-function filterByDebut(year) {
+function filterPlayerDebuted(year) {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
@@ -52,14 +52,14 @@ function filterByDebut(year) {
 }
 
 //Progression 4 - Filter players that play at the position _______
-function filterByPosition(position) {
+function filterPlayersPosition(position) {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
   return players.filter(player => player.position === position);
 }
 //Progression 5 - Filter players that have won ______ award
-function filterByAward(awardName) {
+function filterPlayersAward(award) {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
@@ -68,7 +68,7 @@ function filterByAward(awardName) {
 
 
 //Progression 6 - Filter players that won ______ award ____ times
-function filterByAwardxTimes(awardName, noOfTimes) {
+function filterWonAward(award, times) {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
@@ -76,14 +76,14 @@ function filterByAwardxTimes(awardName, noOfTimes) {
 }
 
 //Progression 7 - Filter players that won ______ award and belong to ______ country
-function filterByAwardxCountry(awardName, country) {
+function filterWonAwardCountry(award, country) {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
   return players.filter(player => player.country === country && player.awards.some(award => award.name === awardName));
 }
 //Progression 8 - Filter players that won atleast ______ awards, belong to ______ team and are younger than ____
-function filterByNoOfAwardsxTeamxAge(noOfAwards, team, age) {
+function filterAwardcountTeamYoung(awardCount, team, age) {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
@@ -91,20 +91,20 @@ function filterByNoOfAwardsxTeamxAge(noOfAwards, team, age) {
 }
 
 //Progression 9 - Sort players in descending order of their age
-function sortByAge() {
+function sortAge() {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
-  return players.sort((a, b) => b.age - a.age);
+  return players.sort((x, y) => x.age - y.age);
 }
 
 //Progression 10 - Sort players beloging to _____ team in descending order of awards won
-function filterByTeamxSortByNoOfAwards(team) {
+function filterSorNoOfAwards(team) {
   if (!players || !Array.isArray(players)) {
     return []; // Return an empty array if players is undefined or not an array
   }
-  const teamPlayers = players.filter(player => player.team === team);
-  return teamPlayers.sort((a, b) => b.awards.length - a.awards.length);
+  const sportsPlayer = players.filter(player => player.team === team);
+  return sportsPlayers.sort((a, b) => b.awards.length - a.awards.length);
 }
 
 //Challenge 1 - Sort players that have won _______ award _____ times and belong to _______ country in alphabetical order of their names

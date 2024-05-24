@@ -110,7 +110,7 @@ describe("Filter player details based on the debut year -filterByDebut", functio
       }
     ];
 
-    let actualResult = filterByDebut(2005);
+    let actualResult = filterPlayerDebuted(2005);
 
     expect(actualResult).toEqual(expectedResult);
   });
@@ -213,22 +213,22 @@ describe("Filter player details based on the debut year -filterByDebut", functio
   });
 
   it("Return empty array if there no players debuted in the given year", function() {
-    expect(filterByDebut(2000)).toEqual([]);
+    expect(filterPlayerDebuted(2000)).toEqual([]);
   });
 });
 
 //Trial 4 - Filter players that play at the position _______
 describe("Filter players based on  position - filterByPosition", function() {
   it("Defines filterByPosition", function() {
-    expect(typeof filterByPosition).toBe("function");
+    expect(typeof filterPlayersPosition).toBe("function");
   });
 
   it("Return empty array when no parameters are passed", function() {
-    expect(filterByPosition()).toEqual([]);
+    expect(filterPlayersPosition()).toEqual([]);
   });
 
   it("Return empty array if specfied position is not defined", function() {
-    expect(filterByPosition("substitute")).toEqual([]);
+    expect(filterPlayersPosition("substitute")).toEqual([]);
   });
 
   it("Return all players at the specified position", function() {
@@ -303,28 +303,28 @@ describe("Filter players based on  position - filterByPosition", function() {
       }
     ];
 
-    let result = filterByPosition("Defender");
+    let result = filterPlayersPosition("Defender");
 
     expect(result).toEqual(expectedResult);
   });
 
   it("Validate the number of players with same position", function() {
-    expect(filterByPosition("Forward").length).toEqual(13);
+    expect(filterPlayersPosition("Forward").length).toEqual(13);
   });
 });
 
 // //Trial 5 - Filter players that have won ______ award
 describe("Filter players based on award - filterByAward", function() {
   it("Defines filterByAward", function() {
-    expect(typeof filterByAward).toBe("function");
+    expect(typeof filterPlayersAward).toBe("function");
   });
 
   it("Return empty array when no parameter is passed", function() {
-    expect(filterByAward()).toEqual([]);
+    expect(filterPlayersAward()).toEqual([]);
   });
 
   it("Return empty array if no player has won the given award", function() {
-    expect(filterByAward("Golden Leg")).toEqual([]);
+    expect(filterPlayersAward("Golden Leg")).toEqual([]);
   });
 
   it("Return players who have won FIFA FIFPro World XI award", function() {
@@ -487,7 +487,7 @@ describe("Filter players based on award - filterByAward", function() {
       }
     ];
 
-    let actualResult = filterByAward("FIFA FIFPro World XI");
+    let actualResult = filterPlayersAward("FIFA FIFPro World XI");
 
     expect(actualResult).toEqual(expectedResult);
   });
@@ -572,7 +572,7 @@ describe("Filter players based on awards and number of times - filterByAwardxTim
       }
     ];
 
-    let actualResult = filterByAwardxTimes("African Player of the Year", 2);
+    let actualResult = filterWonAward("African Player of the Year", 2);
 
     expect(actualResult).toEqual(expectedResult);
   });
@@ -625,7 +625,7 @@ describe("Filter players based on awards and number of times - filterByAwardxTim
       }
     ];
 
-    let actualResult = filterByAwardxTimes(
+    let actualResult = filterWonAward(
       "PFA Premier League Team of the Year",
       2
     );
@@ -637,25 +637,25 @@ describe("Filter players based on awards and number of times - filterByAwardxTim
 // //Trial 7 - Filter players that won ______ award and belong to ______ country
 describe("Filter players based on awards and country - filterByAwardxCountry", function() {
   it("Defines filterByAwardxCountry", function() {
-    expect(typeof filterByAwardxCountry).toBe("function");
+    expect(typeof filterWonAwardCountry).toBe("function");
   });
 
   it("Return empty array when no parameters are passed", function() {
-    expect(filterByAwardxCountry()).toEqual([]);
+    expect((filterWonAwardCountry)).toEqual([]);
   });
 
   it("Return empty array if no player has won given award", function() {
-    expect(filterByAwardxCountry("Golden Leg", "Belgium")).toEqual([]);
+    expect(filterWonAwardCountry("Golden Leg", "Belgium")).toEqual([]);
   });
 
   it("Return empty array if no player belongs to given country", function() {
     expect(
-      filterByAwardxCountry("Premier League Golden Boot", "India")
+      filterWonAwardCountry("Premier League Golden Boot", "India")
     ).toEqual([]);
   });
 
   it("Return empty array if no player has won given award nor belongs to given country", function() {
-    expect(filterByAwardxCountry("Golden Leg", "India")).toEqual([]);
+    expect(filterWonAwardCountry("Golden Leg", "India")).toEqual([]);
   });
 
   it("Return all players that belong to England and have won Premier League Golden Boot", function() {
@@ -755,11 +755,11 @@ describe("Filter players based on awards, team and age - filterByNoOfAwardsxTeam
   });
 
   it("Return empty array when no parameters are passed", function() {
-    expect(filterByNoOfAwardsxTeamxAge()).toEqual([]);
+    expect(filterAwardcountTeamYoung()).toEqual([]);
   });
 
   it("Return empty array if no match is found", function() {
-    expect(filterByNoOfAwardsxTeamxAge(2, "Barcelona", 24)).toEqual([]);
+    expect(filterAwardcountTeamYoung(2, "Barcelona", 24)).toEqual([]);
   });
 
   it("Return players younger than 40 years of age who have won at least 1 award and play for Real Madrid", function() {
@@ -858,7 +858,7 @@ describe("Filter players based on awards, team and age - filterByNoOfAwardsxTeam
       }
     ];
 
-    let actualResult = filterByNoOfAwardsxTeamxAge(1, "Real Madrid", 40);
+    let actualResult = filterAwardcountTeamYoung(1, "Real Madrid", 40);
 
     expect(actualResult).toEqual(expectedResult);
   });
@@ -868,89 +868,60 @@ describe("Filter players based on awards, team and age - filterByNoOfAwardsxTeam
   });
 });
 
-// // //Challenge 2 - Sort players beloging to _____ team in descending order of awards won
-
-// describe("Sort players of team in descending order of awards won - FilterByTeamxSortByNoOfAwards", function () {
-
-//   it("Defines FilterByTeamxSortByNoOfAwards", function () {
-//     expect(typeof FilterByTeamxSortByNoOfAwards).toBe("function");
-
-//   });
-
-//   it("Return empty array when no parameter is passed", function () {
-//     expect(FilterByTeamxSortByNoOfAwards()).toEqual([]);
-//   });
-
-//   it("Return empty array if there is no specified parameteres are there", function () {
-//     expect(FilterByTeamxSortByNoOfAwards("CSK")).toEqual([]);
-//   });
-
-//   it("Sorting players of team in descending order of awards won", function () {
-//     let expectedResult = ([{ "name": "Luka Modric", "age": 33, "debut": 2006, "team": "Real Madrid", "position": "Midfielder", "country": "Croatian", "url": "https://media.guim.co.uk/737d9bde5b3cf33b0230c887acfadf9e68c427bd/169_141_3371_2023/500.jpg", "awards": [{ "name": "The Best FIFA Men's Player", "year": 2016 }, { "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2018 }] }, { "name": "Toni Kroos", "age": 28, "debut": 2007, "team": "Real Madrid", "position": "Midfielder", "country": "Germany", "url": "https://media.guim.co.uk/facf1f1a9a6679715927fa622d63d6659b411ef8/67_447_3931_2359/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2017 }, { "name": "Footballer of the Year in Germany", "year": 2018 }] }, { "name": "Sergio Ramos", "age": 32, "debut": 2004, "team": "Real Madrid", "position": "Defender", "country": "Spain", "url": "https://media.guim.co.uk/abdacdfe6cd56d03d49b7851926ceeab4f8a9314/176_128_2651_1591/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }, { "name": "Marcelo", "age": 30, "debut": 2007, "team": "Real Madrid", "position": "Defender", "country": "Brazil", "url": "https://media.guim.co.uk/7247cfe16161d428218f34b5b0d7e5485bfa84a2/152_149_2221_1333/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }, { "name": "Raphaël Varane", "age": 25, "debut": 2010, "team": "Real Madrid", "position": "Defender", "country": "France", "url": "https://media.guim.co.uk/ca6b3b683136f68e87631092cc5fd5fbf809bc0d/83_565_3451_2071/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2018 }] }]);
-
-//     let actualResult = FilterByTeamxSortByNoOfAwards("Real Madrid");
-
-//     expect(actualResult).toEqual(expectedResult);
-//   });
-// });
-
-// // //Judgement 1 - Sort players that have won _______ award _____ times and belong to _______ country in alphabetical order of their names
-
-// describe("Sort player's names in alphabetical order  who have won certain awards certain times - FilterByTeamxSortByNoOfAwards", function () {
-//   it("Defines SortByNamexAwardxTimes", function () {
-//     expect(typeof SortByNamexAwardxTimes).toBe("function");
-//   });
-
-//   it("Return empty array when no parameter is passed", function () {
-//     expect(SortByNamexAwardxTimes()).toEqual([]);
-//   });
-
-//   it("Return empty array if there is no specified parameteres are there", function () {
-//     expect(SortByNamexAwardxTimes("IPL TROPHY", 1, "SRI LANKA")).toEqual([]);
-//   });
-
-//   it("Sort players name alphabetical order of names who have won certain awards certain times", function () {
-//     let expectedResult = ([{ "name": "Marcelo", "age": 30, "debut": 2007, "team": "Real Madrid", "position": "Defender", "country": "Brazil", "url": "https://media.guim.co.uk/7247cfe16161d428218f34b5b0d7e5485bfa84a2/152_149_2221_1333/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }, { "name": "Neymar", "age": 26, "debut": 2009, "team": "Paris St-Germain", "position": "Forward", "country": "Brazil", "url": "https://media.guim.co.uk/2b6caa5d916bf2936e054f7294f020a500caa0fa/187_230_2734_1641/500.jpg", "awards": [{ "name": "FIFA Puskás Award", "year": 2012 }, { "name": "FIFA FIFPro World XI", "year": 2017 }, { "name": "Samba Gold", "year": 2017 }] }]);
-
-//     let actualResult = SortByNamexAwardxTimes("FIFA FIFPro World XI", 1, "Brazil");
-
-//     expect(actualResult).toEqual(expectedResult);
-
-//   });
-
-//   it("Return single array if only one array satisfies the condition", function () {
-//     let expectedResult = ([{ "name": "Luka Modric", "age": 33, "debut": 2006, "team": "Real Madrid", "position": "Midfielder", "country": "Croatian", "url": "https://media.guim.co.uk/737d9bde5b3cf33b0230c887acfadf9e68c427bd/169_141_3371_2023/500.jpg", "awards": [{ "name": "The Best FIFA Men's Player", "year": 2016 }, { "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2018 }] }]);
-
-//     let actualResult = SortByNamexAwardxTimes("The Best FIFA Men's Player", 2, "Croatian");
-
-//     expect(actualResult).toEqual(expectedResult);
-//   });
-
-// });
-
-// // /Judgement 2 - Sort players that are older than _____ years in alphabetical order
-// // Sort the awards won by them in reverse chronological order*/
-
-// describe("Sort players that are older than specified age in alphabetical order - SortByNamexOlderThan", function () {
-//   it("Defines SortByNamexOlderThan", function () {
-//     expect(typeof SortByNamexOlderThan).toBe("function");
-//   });
-
-//   it("Return empty array when no parameter is passed", function () {
-//     expect(SortByNamexOlderThan()).toEqual([]);
-//   });
-
-//   it("Return empty array if there is no specified parameteres are there", function () {
-//     expect(SortByNamexOlderThan(50)).toEqual([]);
-//   });
-
-//   it("Return empty array if there is no specified parameteres are there", function () {
-
-//     let expectedResult = ([{ "name": "Cristiano Ronaldo", "age": 33, "debut": 2003, "team": "Juventus", "position": "Forward", "country": "Portugal", "url": "https://media.guim.co.uk/f53bba20898fef82548e3b8369d68b3c9b25b4c1/1_189_3919_2351/500.jpg", "awards": [{ "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2017 }, { "name": "European Golden Shoe", "year": 2015 }] }, { "name": "David Silva", "age": 32, "debut": 2005, "team": "Manchester City", "position": "Midfielder", "country": "Spain", "url": "https://media.guim.co.uk/cf0a8b9a85d5cab6f42e5a7172a056b2a2aff541/0_560_4618_2771/500.jpg", "awards": [{ "name": "PFA Premier League Team of the Year", "year": 2014 }] }, { "name": "Luka Modric", "age": 33, "debut": 2006, "team": "Real Madrid", "position": "Midfielder", "country": "Croatian", "url": "https://media.guim.co.uk/737d9bde5b3cf33b0230c887acfadf9e68c427bd/169_141_3371_2023/500.jpg", "awards": [{ "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2016 }] }, { "name": "Sergio Ramos", "age": 32, "debut": 2004, "team": "Real Madrid", "position": "Defender", "country": "Spain", "url": "https://media.guim.co.uk/abdacdfe6cd56d03d49b7851926ceeab4f8a9314/176_128_2651_1591/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }]);
-
-//     let actualResult = SortByNamexOlderThan(32)
-
-//     expect(actualResult).toEqual(expectedResult);
-//   });
-
-// });
+/////////// // //Challenge 2 - Sort players beloging to _____ team in descending order of awards wo///////////
+/////////// describe("Sort players of team in descending order of awards won - FilterByTeamxSortByNoOfAwards", function () ///////////
+///////////   it("Defines FilterByTeamxSortByNoOfAwards", function () {
+///////////     expect(typeof FilterByTeamxSortByNoOfAwards).toBe("function")///////////
+///////////   })///////////
+///////////   it("Return empty array when no parameter is passed", function () {
+///////////     expect(FilterByTeamxSortByNoOfAwards()).toEqual([]);
+///////////   })///////////
+///////////   it("Return empty array if there is no specified parameteres are there", function () {
+///////////     expect(FilterByTeamxSortByNoOfAwards("CSK")).toEqual([]);
+///////////   })///////////
+///////////   it("Sorting players of team in descending order of awards won", function () {
+///////////     let expectedResult = ([{ "name": "Luka Modric", "age": 33, "debut": 2006, "team": "Real Madrid", "position": "Midfielder", "country": "Croatian", "url": "https://media.guim.co.uk/737d9bde5b3cf33b0230c887acfadf9e68c427bd/169_141_3371_2023/500.jpg", "awards": [{ "name": "The Best FIFA Men's Player", "year": 2016 }, { "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2018 }] }, { "name": "Toni Kroos", "age": 28, "debut": 2007, "team": "Real Madrid", "position": "Midfielder", "country": "Germany", "url": "https://media.guim.co.uk/facf1f1a9a6679715927fa622d63d6659b411ef8/67_447_3931_2359/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2017 }, { "name": "Footballer of the Year in Germany", "year": 2018 }] }, { "name": "Sergio Ramos", "age": 32, "debut": 2004, "team": "Real Madrid", "position": "Defender", "country": "Spain", "url": "https://media.guim.co.uk/abdacdfe6cd56d03d49b7851926ceeab4f8a9314/176_128_2651_1591/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }, { "name": "Marcelo", "age": 30, "debut": 2007, "team": "Real Madrid", "position": "Defender", "country": "Brazil", "url": "https://media.guim.co.uk/7247cfe16161d428218f34b5b0d7e5485bfa84a2/152_149_2221_1333/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }, { "name": "Raphaël Varane", "age": 25, "debut": 2010, "team": "Real Madrid", "position": "Defender", "country": "France", "url": "https://media.guim.co.uk/ca6b3b683136f68e87631092cc5fd5fbf809bc0d/83_565_3451_2071/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2018 }] }])///////////
+///////////     let actualResult = FilterByTeamxSortByNoOfAwards("Real Madrid")///////////
+///////////     expect(actualResult).toEqual(expectedResult);
+///////////   });
+/////////// })///////////
+/////////// // //Judgement 1 - Sort players that have won _______ award _____ times and belong to _______ country in alphabetical order of their name///////////
+/////////// describe("Sort player's names in alphabetical order  who have won certain awards certain times - FilterByTeamxSortByNoOfAwards", function () {
+///////////   it("Defines SortByNamexAwardxTimes", function () {
+///////////     expect(typeof SortByNamexAwardxTimes).toBe("function");
+///////////   })///////////
+///////////   it("Return empty array when no parameter is passed", function () {
+///////////     expect(SortByNamexAwardxTimes()).toEqual([]);
+///////////   })///////////
+///////////   it("Return empty array if there is no specified parameteres are there", function () {
+///////////     expect(SortByNamexAwardxTimes("IPL TROPHY", 1, "SRI LANKA")).toEqual([]);
+///////////   })///////////
+///////////   it("Sort players name alphabetical order of names who have won certain awards certain times", function () {
+///////////     let expectedResult = ([{ "name": "Marcelo", "age": 30, "debut": 2007, "team": "Real Madrid", "position": "Defender", "country": "Brazil", "url": "https://media.guim.co.uk/7247cfe16161d428218f34b5b0d7e5485bfa84a2/152_149_2221_1333/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }, { "name": "Neymar", "age": 26, "debut": 2009, "team": "Paris St-Germain", "position": "Forward", "country": "Brazil", "url": "https://media.guim.co.uk/2b6caa5d916bf2936e054f7294f020a500caa0fa/187_230_2734_1641/500.jpg", "awards": [{ "name": "FIFA Puskás Award", "year": 2012 }, { "name": "FIFA FIFPro World XI", "year": 2017 }, { "name": "Samba Gold", "year": 2017 }] }])///////////
+///////////     let actualResult = SortByNamexAwardxTimes("FIFA FIFPro World XI", 1, "Brazil")///////////
+///////////     expect(actualResult).toEqual(expectedResult)///////////
+///////////   })///////////
+///////////   it("Return single array if only one array satisfies the condition", function () {
+///////////     let expectedResult = ([{ "name": "Luka Modric", "age": 33, "debut": 2006, "team": "Real Madrid", "position": "Midfielder", "country": "Croatian", "url": "https://media.guim.co.uk/737d9bde5b3cf33b0230c887acfadf9e68c427bd/169_141_3371_2023/500.jpg", "awards": [{ "name": "The Best FIFA Men's Player", "year": 2016 }, { "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2018 }] }])///////////
+///////////     let actualResult = SortByNamexAwardxTimes("The Best FIFA Men's Player", 2, "Croatian")///////////
+///////////     expect(actualResult).toEqual(expectedResult);
+///////////   })///////////
+/////////// })///////////
+/////////// // /Judgement 2 - Sort players that are older than _____ years in alphabetical order
+/////////// // Sort the awards won by them in reverse chronological order*///////////
+/////////// describe("Sort players that are older than specified age in alphabetical order - SortByNamexOlderThan", function () {
+///////////   it("Defines SortByNamexOlderThan", function () {
+///////////     expect(typeof SortByNamexOlderThan).toBe("function");
+///////////   })///////////
+///////////   it("Return empty array when no parameter is passed", function () {
+///////////     expect(SortByNamexOlderThan()).toEqual([]);
+///////////   })///////////
+///////////   it("Return empty array if there is no specified parameteres are there", function () {
+///////////     expect(SortByNamexOlderThan(50)).toEqual([]);
+///////////   })///////////
+///////////   it("Return empty array if there is no specified parameteres are there", function () ///////////
+///////////     let expectedResult = ([{ "name": "Cristiano Ronaldo", "age": 33, "debut": 2003, "team": "Juventus", "position": "Forward", "country": "Portugal", "url": "https://media.guim.co.uk/f53bba20898fef82548e3b8369d68b3c9b25b4c1/1_189_3919_2351/500.jpg", "awards": [{ "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2017 }, { "name": "European Golden Shoe", "year": 2015 }] }, { "name": "David Silva", "age": 32, "debut": 2005, "team": "Manchester City", "position": "Midfielder", "country": "Spain", "url": "https://media.guim.co.uk/cf0a8b9a85d5cab6f42e5a7172a056b2a2aff541/0_560_4618_2771/500.jpg", "awards": [{ "name": "PFA Premier League Team of the Year", "year": 2014 }] }, { "name": "Luka Modric", "age": 33, "debut": 2006, "team": "Real Madrid", "position": "Midfielder", "country": "Croatian", "url": "https://media.guim.co.uk/737d9bde5b3cf33b0230c887acfadf9e68c427bd/169_141_3371_2023/500.jpg", "awards": [{ "name": "Ballon", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2018 }, { "name": "The Best FIFA Men's Player", "year": 2016 }] }, { "name": "Sergio Ramos", "age": 32, "debut": 2004, "team": "Real Madrid", "position": "Defender", "country": "Spain", "url": "https://media.guim.co.uk/abdacdfe6cd56d03d49b7851926ceeab4f8a9314/176_128_2651_1591/500.jpg", "awards": [{ "name": "FIFA FIFPro World XI", "year": 2019 }] }])///////////
+///////////     let actualResult = SortByNamexOlderThan(32///////////
+///////////     expect(actualResult).toEqual(expectedResult);
+///////////   })///////////
+/////////// })///////////
